@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .navbar{
+      border-bottom: 2px solid gray;
+    }
+    .webbutton{
+      height:45px
+    }
+    .cart{
+      height: 50px;
+      padding-top: 0px;
+    }
+
+  </style>
+  <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+  <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navebar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Dashbord</a>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'signup' %}">SignUp</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          {% endif %}
+
+        </ul>
+
+        <ul style="list-style-type: none">
+        <li class="nav-item">
+          <a class="btn btn-dark btn-larg webbutton pt-2"href="{% url 'weblogin' %}" style="color:white; font-weight: bold;" >Create Your Own Website</a>
+
+        </li>
+      </ul>
+      <ul class="cart"style="list-style-type: none">
+        <li class="nav-item pt-3">
+          <span id="cart-counter">{{request.session.count}}</span>
+          <a href="{% url 'viewcart' %}">
+          <i class="fa-solid fa-cart-shopping"></i>
+          </a>
+
+        </li>
+      </ul>
+
+      </div>
+    </div>
+  </nav>
+
+
+</body>
+</html>

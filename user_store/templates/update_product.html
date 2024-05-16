@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <style>
+        .website_body {
+            background-image: url("{% static 'images/business.webp' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .website_form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .website_form input[type="text"],
+        .website_form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .website_form input[type="submit"],
+        .website_form a {
+            padding: 10px 20px;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            display: inline-block;
+            width: 49%;
+            text-align: center;
+        }
+
+        .website_form input[type="submit"]:hover,
+        .website_form a:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body class="website_body bg-secondary">
+<div class="m-5 text-white">
+    <h1>PRODUCTS DETAIL</h1>
+</div>
+{% if messages %}
+    {% for message in messages %}
+        <span class="alert alert-success m-2">{{ message }}</span>
+    {% endfor %}
+{% endif %}
+<div class="website_form">
+    <form action="" method='POST' novalidate enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for fm in form %}
+            <label>{{ fm.label_tag }}</label><br>
+            {{ fm }}<br>
+            <small class="error">{{ fm.errors|striptags }}</small><br>
+        {% endfor %}
+        <input class="btn btn-primary" type="submit" value="Submit">
+        <a href="{% url 'yourproduct' %}" class="btn btn-primary">Your Products</a>
+    </form>
+</div>
+</body>
+</html>

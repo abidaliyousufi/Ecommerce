@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="">
+  <form action="" method="POST" novalidate autocomplete="off" id="login-form">
+    {% csrf_token %}
+    {% for field in form %}
+      {{ field.label_tag }} <br>
+      {% if field.name == "password" %}
+        <input type="password" name="password" id="id_password" class="form-control" autocomplete="new-password"><br>
+      {% else %}
+        {{ field }}<br>
+      {% endif %}
+      {{ field.errors }}<br><br>
+    {% endfor %}
+    <input type="submit" value="Login" class="btn btn-primary">
+  </form>
+   <p>hello</p>
+  {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+      <p>{{ error }}</p>
+    {% endfor %}
+  {% endif %}
+ 
+</div>
+
+<script>
+  window.addEventListener('load', function() {
+      // Clear all input fields
+      var form = document.getElementById('login-form');
+      var inputs = form.getElementsByTagName('input');
+      for (var i = 0; i < inputs.length; i++) {
+          if (inputs[i].type == 'text' || inputs[i].type == 'password') {
+              inputs[i].value = '';
+          }
+      }
+  });
+</script>
+{% endblock content %}

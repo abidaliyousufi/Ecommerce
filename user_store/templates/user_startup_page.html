@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class=" con bg-dark">
+  <div class="row ro text-center">
+    <div class="col-sm-12 text-center">
+
+        <div class="start_title">
+          <h1>START SELLING WITH US ?</h1>
+        </div>
+        {% for message in messages %}
+        <div class="alert alert-danger text-dark">{{ message }}</div>
+      {% endfor %}
+        <div class="input">
+          <form action=""method='POST'novalidate>
+            {% csrf_token %}
+            {% for fm in form %}
+             {{fm.label_tags}}{{fm}} <small class="er">{{fm.errors|striptags}}</small> <br>
+            {% endfor %}
+            <br>
+           <div ><input type="submit" value="start"class='btns btn btn-success btn-lg'></div>
+          </form>
+          {% if non_field_errors %}
+          <ul class="errorlist">
+              {% for error in non_field_errors %}
+                  <li><strong>{{ error|escape }}</strong></li>
+              {% endfor %}
+          </ul>
+      {% endif %}
+
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

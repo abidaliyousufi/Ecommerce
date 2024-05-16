@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <style>
+    .webiste_body{
+      background-image: url("{% static 'images/bussness.webp' %}");
+    }
+
+  </style>
+</head>
+<body class="webiste_body">
+   <div class="m-5 text-white">
+    <h1>PRODUCTS DETAIL</h1>
+   </div>
+   {% if messages %}
+   {% for message in messages %}
+       <span class="alert alert-success m-2"> {{message}}</span>
+     {% endfor %}
+   {% endif %}
+   <div class="website_form">
+  <form action=""method='POST' novalidate enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for fm in form %}
+       {{fm.label_tag}}{{fm}}  <small class="error">{{fm.errors|striptags}}</small><br>
+    {% endfor %}
+    <input class="btn btn-primary" type="submit" value="submit">
+      <a href="{% url 'yourproduct' %}" class="btn btn-primary">Your Products</a>
+</form>
+</div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <style>
+        /* Add your CSS styles here */
+        .product-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
+}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+        .product-item {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-details {
+            padding: 10px;
+        }
+        .product-title {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .product-price {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .edit_btn{
+          margin-left: 100px;
+        }
+        .button-wraper{
+
+    display: flex;
+    /* Distribute space between buttons */
+    margin-left: 60%;
+}
+.de{
+  margin-left: 4px;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Products</h1>
+        <ul class="product-list">
+            {% for product in fm %}
+            <li class="product-item">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Title :{{ product.title }}</h3>
+                    <p>Des :{{ product.description }}</p>
+                    <p class="product-price">price  :$ {{ product.price }}</p>
+                    <div class="button-wraper">
+                    <a href="{% url 'update' product.id %}"class="btn btn-primary ">Edit</a>
+                    <a href="{% url 'delete' product.id %}"class="btn btn-danger de">Delete</a>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'logout' %}"class="btn btn-primary"class="edit_btn">Logout</a>
+    </div>
+</body>
+</html>

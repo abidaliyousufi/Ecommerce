@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>update comment</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <style>
+    /* Your custom CSS styles here */
+    body {
+      padding: 20px;
+    }
+    .comment-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .comment-box {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .comment-input {
+      width: 100%;
+      border: none;
+      border-radius: 3px;
+      padding: 8px;
+    }
+    .comment-button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      padding: 8px 20px;
+      margin-top: 10px;
+    }
+    .comment {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="comment-container">
+    <a href="{% url 'home' %}" class="btn">Back</a>
+    <div class="comment-box">
+      <form action="" method="POST">
+        {% csrf_token %}
+
+          {{ comt.label_tag }}
+          {{ form }}
+          {% if comt.errors %}
+            <small class="text-danger">{{ comt.errors|striptags }}</small>
+          {% endif %}
+
+        <button type="submit" class="btn btn-primary comment-button">Submit</button>
+      </form>
+    </div>
+    {% for message in messages %}
+      <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Comment</title>
+</head>
+<body>
+  <form method="POST">{% csrf_token %}
+    <p class="alert alert-danger">Are you sure you want to delete comment "{{ object.title }}"?</p>
+    {{ form }}
+    <input type="submit" class="btn btn-sm btn-danger"value="Confirm">
+  </form>
+
+
+</body>
+</html>

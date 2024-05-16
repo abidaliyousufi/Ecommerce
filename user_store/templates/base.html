@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row ">
+      <div class="col-sm-12">
+        {% block navbar %}
+        {% include 'navbar.html' %}
+        {% endblock navbar %}
+      </div>
+    </div>
+  </div>
+  {% for message in messages %}
+    <div class="alert alert-success">{{ message }}</div>
+  {% endfor %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        {% block content %}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3 sidenav">
+                        <h4>Categories</h4>
+                        <div class="category">Clothing</div>
+                        <div class="category">Electronics</div>
+                        <div class="category">Books</div>
+                        <!-- Add more categories here -->
+                    </div>
+                    <div class="col-md-9 main-content">
+                        <!-- Main content here -->
+                        <div class="col-md-9 main-content">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Featured Products</h5>
+                                    <p class="card-text">Check out our latest products!</p>
+                                </div>
+                            </div>
+
+                            <!-- Product Card -->
+                            {% for product  in products %}
+
+                            <div class="card">
+                                <img src="{{product.image.url}}" class="card-img-top" alt="{{image.name}}">
+                                <div class="card-body">
+                                    <h5 class="card-title">Product Name :{{product.title}}</h5>
+                                    <p class="card-text">Product Description {{product.description}}.</p>
+                                    <p class="card-text">Price: {{product.price}}</p>
+                                    <a href="{% url 'comment' product.id %}"class="btn btn-primary ">View Detail</a>
+                                    {% if request.user.id != product.user.id %}
+                                    <a href="{% url 'addcart' product.id %}" class="btn btn-primary">Add Cart</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock content %}
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+</body>
+</html>
