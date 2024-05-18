@@ -34,15 +34,7 @@ def signup_form(request):
   return render(request,'signup.html',{'form':form})
 
 
-from django.shortcuts import render, HttpResponseRedirect
-from django.contrib.auth import authenticate, login
-from .forms import LoginForm
-from django.contrib import messages
 
-from django.shortcuts import render, HttpResponseRedirect
-from django.contrib.auth import authenticate, login
-from .forms import LoginForm
-from django.contrib import messages
 
 def login_form(request):
     if not request.user.is_authenticated:
